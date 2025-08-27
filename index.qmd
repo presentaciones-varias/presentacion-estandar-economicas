@@ -16,6 +16,7 @@ format:
 engine: knitr
 knitr:
   opts_chunk: 
+    echo: TRUE
     R.options:
       width: 120
 ---
@@ -33,28 +34,22 @@ knitr:
 <img src="imagenes/logo_portada2.png" width="20%"/>  
 
 
-[**Capacitación: Aplicación del estándar para la evaluación de estimaciones en encuestas económicas usando el paquete _calidad_**]{.big-par .center-justified}
+[**Implementación del estándar de evaluación de calidad en encuestas económicas: fundamentos y aplicación práctica en R mediante el paquete calidad**]{.big-par .center-justified}
 
 [**Área de Ciencia de Datos**]{.medium-par.center-justified}
 
 [**Unidad de Gobierno de Datos**]{.small-par.center-justified}
 
-[**Abril 2025**]{.big-par .center-justified}
+[**Agosto 2025**]{.big-par .center-justified}
 
 
 
-## Contenidos  
+## Objetivos de la presentación  
 
 ::: {.medium-par}
 
-- Paquete calidad
-  - Descripción
-  - Flujo
-  - Funciones *create_...* y *assess*
-
-- Estándar de calidad para encuestas económicas
-  
-- Aplicación 🚀
+- Dar a conocer las nuevas funcionalidades del paquete calidad
+- Demostrar cómo implementar el estándar para encuestas económicas
 
 :::
 
@@ -66,7 +61,7 @@ knitr:
 
 <br>
 
-[⚠️ La versión actual del paquete se encuentra en periodo de prueba ⚠️]{.center}
+[⚠️ La versión actual del paquete siempre puede mejorar ⚠️]{.center}
 
 <br>
 
@@ -79,55 +74,49 @@ knitr:
 
 [<img src="imagenes/plots/logo_calidad.png" width="10%"/>]{.center}
 
-:::{.incremental .medium-par}
+  
+[<img src="imagenes/estandares.PNG" width="50%"/>]{.center}
 
-- ¿Qué es el paquete *calidad*?
 
-  - Es un paquete en R que permite evaluar la calidad de encuestas según distintos estándares metodológicos.
-  
-  - Desarrollado en 2022 con el objetivo de facilitar la aplicación de estándares para la evaluación de la calidad para todo tipo de usuarios 
-  
-    - En pocas líneas de código se pueda realizar la evaluación de la estimación de interés.
-  
-  - Actualmente el paquete cuenta con 4 criterios de evaluación, los cuales se aplican de forma independiente con su propio flujo de funciones según los parámetros indicados.
-  
-:::
 
 
 ## Paquete calidad | Flujo
 
 :::{.incremental .medium-par}
 
-- El paquete consta de dos grandes funcionalidades:
+- Dos grandes funcionalidades:
 
-  1. Realizar la estimación
+  1. **Realizar la estimación**
   
       - Funciones *create_prop()*, *create_mean()*, *create_size()* y *create_total()*
    
-  2. Realizar la evaluación de la estimación (*función assess()*)
+  2. **Realizar la evaluación de la estimación** (*función assess()*)
     
-      - Actualmente, están disponibles las metodologías de INE y CEPAL: *chile*, *eclac_2020*, *eclac_2023* y **chile_economics** 
-  
-- *calidad* utiliza funciones del paquete *survey* para realizar sus estimaciones, por lo que es necesario definir el diseño de muestra para poder usarlo.
+
+- *calidad* se apoya en el paquete *survey* para realizar las estimaciones
 
 
 :::
 
+. . . 
+
+[<img src="imagenes/thomas-lumley.jpg" width="10%"/>]{.center}
+
 ## Paquete calidad | Funciones create_*
 
 :::{.incremental .medium-par}
-- Las funciones *create_...()* nos permiten obtener la estimación y generar los insumos necesarios para poder realizar la evaluación.
+- Las funciones *create_...()* generan los insumos necesarios para realizar la evaluación.
 
 - Los parámetros principales son:
 
   - *var* : Variable a estimar
   - *domains*: Dominio de interés.
-  - *subpop*: Subpoblación de referencia (variable dummy que realiza filtro de los datos).
+  - *subpop*: Subpoblación de referencia (variable *dummy* que realiza filtro de los datos).
   - *design*: Diseño de muestra creado con *survey*
 
-- Por defecto nos retorna los insumos: se, df, n y cv.
+- Por defecto nos retorna los insumos: **se, df, n y cv**.
 
-- Adicionalmente, estas funciones nos pueden retornar el deff, ess, log_cv y ci.
+- Adicionalmente, estas funciones nos pueden retornar el **deff, ess, log_cv y ci**.
 
 :::
 
@@ -137,7 +126,7 @@ knitr:
 
 - Función *assess()*: evaluación del estándar
 
-  - Parámetros principales:
+  - **Parámetros principales**:
     
     1. *table*: Tabla con las estimaciones generadas con funciones *create_...()*.
     
@@ -151,42 +140,45 @@ knitr:
 :::
 
 
+
+
 ## [Estándar de calidad para encuestas económicas (1/3)]{.big-par}
 
-[<img src="imagenes/plots/estandar_economiscas_doc.png" width="50%"/>]{.center}
-
-
-## [Estándar de calidad para encuestas económicas (2/3)]{.big-par}
-
-Recordemos como se compone la evaluación del estándar de encuestas económicas:
+Recordemos un poco el estándar de encuestas económicas:
 
 [<img src="imagenes/plots/estandar_economicas.png" width="75%"/>]{.center} 
 
 
 
-## [Estándar de calidad para encuestas económicas (3/3)]{.big-par}
+## [Estándar de calidad para encuestas económicas (2/3)]{.big-par}
 
 :::{.incremental .medium-par}
 
-- Para el estándar de encuestas económicas, los siguientes parámetros son fundamentales en la función *assess()*:
+- Parámetros particulares para el estándar de económicas en  *assess()*:
 
-  1. **domain_info**: Booleano, donde *TRUE* implica que la estimación coincide con un estrato de muestreo. Default *FALSE* (se usa para "chile_economics" y "eclac_2023").
+  1. **domain_info**: *TRUE* implica que la estimación coincide con un estrato de muestreo. Default *FALSE*.
   
-  2. **table_n_obj**: Dataframe que contiene el tamaño de muestra objetivo, **n_obj**, de los dominios indicados en la estimación. Por default es *NULL* y se evaluaran como no fiables las estimaciones que tengan un tamaño menor a 30. (se usa para "chile_economics").
+  2. **table_n_obj**: Dataframe que contiene el tamaño de muestra objetivo (**n_obj**) de los dominios indicados en la estimación. 
      
-     -  Es importante que en este dataframe los nombres de los dominios **coincidan** con los utilizados en la función *create_...()* y que la columna del tamaño objetivo se llame **n_obj**.
+     -⚠️Es importante que en este dataframe los nombres de los dominios **coincidan** con los utilizados en la función *create_()* y que la columna del tamaño objetivo se llame **n_obj**.
 
 :::
 
+## [Estándar de calidad para encuestas económicas (3/3)]{.big-par}
+
+
+⚠️Si no hay información, el paquete tomará una decisión conservadora ⚠️
+
+[<img src="imagenes/flujo_conservador.PNG" width="65%"/>]{.center} 
 
 
 ## Aplicación 
 
 ::: {.medium-par .incremental}
 
-- Para esta capacitación usaremos los datos de la VII ELE disponibles en el paquete
+Usaremos los datos de la VII ELE, disponibles en el paquete
 
-- Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.
+Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.
 
 :::
 
@@ -196,22 +188,279 @@ Recordemos como se compone la evaluación del estándar de encuestas económicas
 
 [¡Vamos a R 🚀!]{.center}
 
-[[link código](https://inechile-my.sharepoint.com/:u:/g/personal/jmpreussa_ine_gob_cl/EfMopEWxF0JArMAYU3iGGQEB2Y1xFBUDn7ebhjJIRHlvfw?e=HQuU8E)]{.center}
+
+## Primeros pasos
+
+Debemos instalar calidad y cargar algunas dependencias
+
+```{r, eval=FALSE, echo=TRUE}
+install.packages('calidad')
+```
+
+```{r, echo=TRUE}
+library(calidad)    
+library(survey)     # para crear diseño de muestra
+library(dplyr)  
+```
+
+## Cargando datos
+
+El paquete cuenta con datos de prueba de la ELE7 (Encuesta Longitudinal de Empresas)
+
+```{r, echo=TRUE}
+head(ELE7, 3) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 15)
+
+```
+## Declaramos el diseño
+
+```{r}
+options(survey.lonely.psu = 'remove')    # indicamos tratamiento upm
+
+## diseño de muestra con factor de expansión transversal
+dc_ele <- svydesign(ids = ~rol_ficticio,
+                    weights = ~fe_transversal,
+                    strata = ~estrato,
+                    fpc = ~pob,                 # correccion por poblacion finita
+                    data = ELE7)
+```
+
+## Estimando proporciones
+
+Productividad salarial (Valor agregado / remuneración bruta de personal contratado)
+
+```{r, echo=TRUE}
+## sin dominios
+create_prop(var= 'VA_2022f',
+            denominator = 'REMP_TOTAL',
+            design = dc_ele)
+
+
+```
+
+. . . 
+
+
+```{r}
+# segun codigo de tamaño y codido de actividad
+prod_salarial <- create_prop('VA_2022f',
+                             denominator = 'REMP_TOTAL',
+                             domains = 'cod_tamano+ cod_actividad',
+                             design = dc_ele)
+
+```
+
+```{r, echo=FALSE}
+prod_salarial %>%
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+```
+
+
+## Nuevos pasos del estándar  
+
+Necesitamos el tamaño de muestra objetivo 
+
+. . .
+
+El paquete cuenta con una tabla para la ELE7 😀  
+
+```{r}
+ELE7_n_obj %>% 
+  head(4) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 14)
+
+```
+
+## Agregando muestra objetivo (error)  
+
+
+```{r, error=TRUE}
+
+assess(prod_salarial,                # indicamos estimacion con funcion create
+       scheme = 'chile_economics',   # indicamos criterio
+       domain_info = T,              # ¿pertenece a dominio planificado?
+       table_n_obj = ELE7_n_obj)
+
+
+
+```
+
+
+❌Las clases de las columnas no coinciden
+
+. . .
+
+```{r}
+
+str(ELE7_n_obj)
+str(prod_salarial)
+```
+
+
+
+## Agregando muestra objetivo  
+
+Podemos modificar la tabla auxiliar para ajustarla a la salida de create
+
+```{r}
+# modifiquemos la tabla ELE7_n_obj
+ELE7_n_obj2 <- ELE7_n_obj %>%
+  mutate(cod_actividad = cod_actividad_letra,
+         cod_tamano = as.character(cod_tamano))
+
+
+evaluacion_estandar <- assess(prod_salarial,
+                              scheme = 'chile_economics',
+                              domain_info = T,
+                              table_n_obj = ELE7_n_obj2, # tabla con clases corregidas
+                              ratio_between_0_1 = FALSE) # no es una estimación definida entre 0 y 1
+
+```
+
+## Revisemos el resultado
+
+```{r}
+# revisión del estado final para n<30:
+evaluacion_estandar %>%
+  select(cod_tamano, cod_actividad, stat, n, compliance_rate, label) %>% 
+  filter(n<30) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+```
+
+## Hagamos un experimento
+
+Modifiquemos un tamaño objetivo, para subir artificialmente la tasa de logro
+
+```{r}
+ELE7_n_obj2 %>% 
+  filter(cod_tamano == '2' & cod_actividad== 'B') %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+```
+. . .
+
+```{r}
+ELE7_n_obj3 <- ELE7_n_obj2 %>%
+  mutate(n_obj = ifelse(cod_tamano == '2' & cod_actividad== 'B', 20, n_obj))
+```
+
+## Hagamos un experimento
+
+```{r}
+evaluacion_modificada <- assess(prod_salarial,
+                                scheme = 'chile_economics',
+                                domain_info = T,
+                                table_n_obj = ELE7_n_obj3,
+                                ratio_between_0_1 = FALSE)
+
+evaluacion_modificada %>%
+  select(cod_tamano, cod_actividad, stat, n, compliance_rate, label) %>% 
+  filter(n<30) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+
+```
+## Siempre puede haber problemas
+
+**¿Qué pasa si se hace imposible incluir el dataframe en la función assess?** 🤔
+
+. . .
+
+Podemos agregar directamente la columna n_obj en la salida de create  
+
+```{r}
+# tabla prod_salarial le agregamos los tamaños objetivos:
+prod_salarial2 <- prod_salarial %>%
+  left_join(ELE7_n_obj2 %>%
+              select(-cod_actividad_letra),
+            by = c('cod_tamano', 'cod_actividad'))
+
+# verificamos que no se hayan generado NAs:
+is.na(prod_salarial2$n_obj) %>% sum()
+
+# realizamos la evaluación:
+evaluacion_estandar2 <- assess(prod_salarial2,
+                               scheme = 'chile_economics',
+                               domain_info = T,
+                               ratio_between_0_1 = FALSE)
+
+```
+
+## Ausencia de muestra objetivo
+
+**¿Qué pasa si no cuento con datos de muestra objetivo?** 🤔
+
+. . .
+
+El paquete etiquetará como no fiable todas las estimaciones con n < 30  
+
+```{r}
+# No incluímos información sobre muestra objetivo
+evaluacion_sin_nobj <- assess(prod_salarial, 
+                              scheme = 'chile_economics',
+                              domain_info = T, 
+                              ratio_between_0_1 = FALSE)
+
+## revisión del estado final para n<30
+evaluacion_sin_nobj %>%
+  select(cod_tamano, cod_actividad, stat, n, compliance_rate, label) %>% 
+  filter(n<30) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+```
+
+## Evaluación del tabulado
+
+```{r}
+evaluacion_estandar_publish <- assess(prod_salarial,
+                                      scheme = 'chile_economics',
+                                      domain_info = TRUE,
+                                      table_n_obj = ELE7_n_obj2,     # tabla con tamaños objetivos corregidos
+                                      ratio_between_0_1 = FALSE,
+                                      publish = TRUE) # parámetro de publicación
+
+evaluacion_estandar_publish %>% 
+  select(cod_tamano, cod_actividad, stat, n, compliance_rate, label, publication) %>%
+  head() %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling(font_size = 16)
+
+
+
+```
+
+## Evaluación del tabulado
+
+```{r}
+evaluacion_estandar_publish %>% 
+  select(label) %>% 
+  table() %>%
+  prop.table()
+
+```
+
 
 ## Para finalizar
 
 ::: {.medium-par .incremental}
 
-- Para mayor información sobre el uso del paquete, están disponibles los tutoriales en la pag del INE [link](https://www.ine.gob.cl/calidad-estadistica/directrices-metodologicas/tutorial-paquete-calidad) y en cran [link](https://cran.r-project.org/web/packages/calidad/vignettes/tutorial.html)
+- Para mayor información sobre el uso del paquete, visita los tutoriales en el sitio del INE [link](https://www.ine.gob.cl/calidad-estadistica/directrices-metodologicas/tutorial-paquete-calidad) y en cran [link](https://cran.r-project.org/web/packages/calidad/vignettes/tutorial.html)
 
 - Si alguien está interesado/a en colaborar en la creación de nuevas funcionalidades, puede realizarlo a través de la página github.com/inesscc/calidad 💻🛠️
 
-- ¡Muchas gracias al equipo de económicas y marcos y muestras por la ayuda y feedback 🚀!
+- ¡Muchas gracias al departamento de Estadísticas Económicas y al Subdepartamento de Marcos y Muestras por la ayuda y feedback 🚀!
 
-- Quedamos atentos ante sus comentarios 👀
+
 
 :::
 
+. . .
+
+[**Quedo atento ante sus comentarios 👀**]{.center}
 
 
 #
@@ -222,12 +471,12 @@ Recordemos como se compone la evaluación del estándar de encuestas económicas
 
 <img src="imagenes/logo_portada2.png" width="20%"/>  
 
-[**Capacitación: Aplicación del estándar para la evaluación de estimaciones en encuestas económicas usando el paquete _calidad_**]{.big-par .center-justified}
+[**Implementación del estándar de evaluación de calidad en encuestas económicas: fundamentos y aplicación práctica en R mediante el paquete calidad**]{.big-par .center-justified}
 
 [**Área de Ciencia de Datos**]{.medium-par.center-justified}
 
 [**Unidad de Gobierno de Datos**]{.small-par.center-justified}
 
-[**Abril 2025**]{.big-par .center-justified}
+[**Agosto 2025**]{.big-par .center-justified}
 
 

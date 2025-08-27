@@ -28,7 +28,7 @@
   --background-color: white;
   --link-color: #1381B0;
   --text-bold-color: black;
-  --code-highlight-color: rgba(255,255,0,0.5); 
+  --code-highlight-color: rgba(255,255,0,0.5);
   --inverse-text-color: #000000;
   --inverse-background-color: blue;
   --inverse-header-color: #FFFFFF;
@@ -43,7 +43,7 @@
 }
 
 
-/* 
+/*
 ----------------------------------------------------------------------------------------------------
 General settings for revealjs format.
 They have effect on all the elements of a particular kind which are found in the presentation.
@@ -97,14 +97,14 @@ p .float-right{
   float: right;
   clear: right;
   margin-right: 15px; !important
-  
-  
+
+
 }
 
 p .big-margin{
   margin-right: 80px; !important
-  
-  
+
+
 }
 
 
@@ -135,7 +135,7 @@ p .big-margin{
 .medium-par { /* párrafo mediano*/
   font-size: 25px;
 }
-  
+
 .medium-par-red { /* párrafo mediano*/
   font-size: 30px;
   color: #4a25db;
@@ -199,7 +199,7 @@ blockquote {
   margin-left: auto;
   margin-right: auto;
   text-align: justify;
-  text-justify: auto;  
+  text-justify: auto;
   text-align-last: center;
 }
 
@@ -219,7 +219,7 @@ blockquote {
 } */
 
 
-/* 
+/*
 ----------------------------------------------------------------------------------------------------
 Settings for extra features.
 ----------------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ Settings for extra features.
   background-size: contain;
   position: absolute;
   bottom: 0em;
-  
+
   left: 0em;
   width: 1000px;
   height: 5px;
@@ -281,6 +281,9 @@ Settings for colors
   color: red;
 }
 
+table tr:hover {
+  background-color: #f0f0f0;
+}
 
 /*
 ----------------------------------------------------------------------------------------------------
@@ -296,7 +299,7 @@ Settings for figures
 
 /*
 ----------------------------------------------------------------------------------------------------
-Settings under testing. 
+Settings under testing.
 Their use is not recommended !!
 ----------------------------------------------------------------------------------------------------
 */
@@ -337,7 +340,7 @@ Their use is not recommended !!
   background-position: top;
   background-size: 100px;
   text-align: left;
-  font-size: 50px;  
+  font-size: 50px;
 } */
 
 
