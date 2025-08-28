@@ -70,12 +70,37 @@ knitr:
 [Quedamos atentos a su feedback 😀]{.center}
 
 
-## Paquete calidad | Descripción 
 
-[<img src="imagenes/plots/logo_calidad.png" width="10%"/>]{.center}
 
   
-[<img src="imagenes/estandares.PNG" width="50%"/>]{.center}
+## Paquete calidad
+
+
+:::: {layout-ncol=2}
+ 
+::: {.fragment .small-par .center}
+ 
+
+<img src="imagenes/estandares.PNG" width="100%"/>
+ 
+:::
+ 
+::: {.fragment .small-par .center}
+
+<img src="imagenes/plots/logo_calidad.png" width="20%"/>
+
+ 
+[Estándar de hogares INE](https://www.ine.gob.cl/docs/default-source/institucionalidad/buenas-prácticas/clasificaciones-y-estandares/estándar-evaluación-de-calidad-de-estimaciones-publicación-27022020.pdf)
+
+[Estándar de encuestas económicas INE](https://www.ine.gob.cl/docs/default-source/buenas-practicas/directrices-metodologicas/estandares/documentos/estándar-evaluación-de-calidad-de-estimaciones-económicas.pdf?sfvrsn=201fbeb9_2)
+
+[Estándar CEPAL](https://repositorio.cepal.org/server/api/core/bitstreams/4e2e55fc-3429-4619-8b6a-0bd5357b23b5/content)
+
+[Estándar regional](https://repositorio.cepal.org/server/api/core/bitstreams/f04569e6-4f38-42e7-a32b-e0b298e0ab9c/content)
+
+:::
+ 
+::::
 
 
 
@@ -105,7 +130,7 @@ knitr:
 ## Paquete calidad | Funciones create_*
 
 :::{.incremental .medium-par}
-- Las funciones *create_...()* generan los insumos necesarios para realizar la evaluación.
+- Las funciones *create_()* generan los insumos necesarios para realizar la evaluación.
 
 - Los parámetros principales son:
 
@@ -176,7 +201,7 @@ Recordemos un poco el estándar de encuestas económicas:
 
 ::: {.medium-par .incremental}
 
-Usaremos los datos de la VII ELE, disponibles en el paquete
+Usaremos los datos de la **VII ELE**, disponibles en el paquete
 
 Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.
 
@@ -243,7 +268,7 @@ create_prop(var= 'VA_2022f',
 
 
 ```{r}
-# segun codigo de tamaño y codido de actividad
+# según codigo de tamaño y codido de actividad
 prod_salarial <- create_prop('VA_2022f',
                              denominator = 'REMP_TOTAL',
                              domains = 'cod_tamano+ cod_actividad',

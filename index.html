@@ -232,10 +232,25 @@
 <p><span class="center">Quedamos atentos a su feedback 😀</span></p>
 </div>
 </section>
-<section id="paquete-calidad-descripción" class="slide level2">
-<h2>Paquete calidad | Descripción</h2>
-<p><span class="center"><img src="imagenes/plots/logo_calidad.png" width="10%"></span></p>
-<p><span class="center"><img src="imagenes/estandares.PNG" width="50%"></span></p>
+<section id="paquete-calidad" class="slide level2">
+<h2>Paquete calidad</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="fragment small-par center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><img src="imagenes/estandares.PNG" width="100%"></p>
+</div>
+<div class="fragment small-par center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><img src="imagenes/plots/logo_calidad.png" width="20%"></p>
+<p><a href="https://www.ine.gob.cl/docs/default-source/institucionalidad/buenas-prácticas/clasificaciones-y-estandares/estándar-evaluación-de-calidad-de-estimaciones-publicación-27022020.pdf">Estándar de hogares INE</a></p>
+<p><a href="https://www.ine.gob.cl/docs/default-source/buenas-practicas/directrices-metodologicas/estandares/documentos/estándar-evaluación-de-calidad-de-estimaciones-económicas.pdf?sfvrsn=201fbeb9_2">Estándar de encuestas económicas INE</a></p>
+<p><a href="https://repositorio.cepal.org/server/api/core/bitstreams/4e2e55fc-3429-4619-8b6a-0bd5357b23b5/content">Estándar CEPAL</a></p>
+<p><a href="https://repositorio.cepal.org/server/api/core/bitstreams/f04569e6-4f38-42e7-a32b-e0b298e0ab9c/content">Estándar regional</a></p>
+</div>
+</div>
+</div>
 </section>
 <section id="paquete-calidad-flujo" class="slide level2 scrollable">
 <h2>Paquete calidad | Flujo</h2>
@@ -260,7 +275,7 @@
 <h2>Paquete calidad | Funciones create_*</h2>
 <div class="medium-par">
 <ul>
-<li class="fragment"><p>Las funciones <em>create_…()</em> generan los insumos necesarios para realizar la evaluación.</p></li>
+<li class="fragment"><p>Las funciones <em>create_()</em> generan los insumos necesarios para realizar la evaluación.</p></li>
 <li class="fragment"><p>Los parámetros principales son:</p>
 <ul>
 <li class="fragment"><em>var</em> : Variable a estimar</li>
@@ -316,7 +331,7 @@
 <section id="aplicación" class="slide level2">
 <h2>Aplicación</h2>
 <div class="medium-par">
-<p>Usaremos los datos de la VII ELE, disponibles en el paquete</p>
+<p>Usaremos los datos de la <strong>VII ELE</strong>, disponibles en el paquete</p>
 <p>Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.</p>
 </div>
 <div class="fragment">
@@ -443,7 +458,7 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># segun codigo de tamaño y codido de actividad</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># según codigo de tamaño y codido de actividad</span></span>
 <span id="cb7-2"><a href=""></a>prod_salarial <span class="ot">&lt;-</span> <span class="fu">create_prop</span>(<span class="st">'VA_2022f'</span>,</span>
 <span id="cb7-3"><a href=""></a>                             <span class="at">denominator =</span> <span class="st">'REMP_TOTAL'</span>,</span>
 <span id="cb7-4"><a href=""></a>                             <span class="at">domains =</span> <span class="st">'cod_tamano+ cod_actividad'</span>,</span>
