@@ -201,11 +201,11 @@ Recordemos un poco el estándar de encuestas económicas:
 
 ::: {.medium-par .incremental}
 
-Usaremos los datos de la **VII ELE**, disponibles en el paquete
+- Usaremos los datos de la **VII ELE**, disponibles en el paquete
 
-Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.
+- Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.
 
-⚠️No soy experto en la ELE⚠️
+- ⚠️No soy experto en la ELE⚠️
 
 :::
 
