@@ -333,6 +333,7 @@
 <div class="medium-par">
 <p>Usaremos los datos de la <strong>VII ELE</strong>, disponibles en el paquete</p>
 <p>Estimaremos y evaluaremos la productividad salarial (razón entre el Valor agregado 2022 y Remuneración total bruta del personal contratado) por tamaño y actividad.</p>
+<p>⚠️No soy experto en la ELE⚠️</p>
 </div>
 <div class="fragment">
 <p><br></p>
@@ -1024,17 +1025,17 @@
 <div class="fragment">
 <p>El paquete cuenta con una tabla para la ELE7 😀</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>ELE7_n_obj <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href=""></a>  <span class="fu">head</span>(<span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href=""></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href=""></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>ELE7_n_obj <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>cod_actividad) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href=""></a>  <span class="fu">head</span>(<span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href=""></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href=""></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">cod_tamano</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">cod_actividad_letra</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">cod_actividad</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">n_obj</th>
 </tr>
 </thead>
@@ -1042,25 +1043,21 @@
 <tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">K</td>
-<td style="text-align: right;">10</td>
 <td style="text-align: right;">358</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">K</td>
-<td style="text-align: right;">10</td>
 <td style="text-align: right;">210</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">A</td>
-<td style="text-align: right;">1</td>
 <td style="text-align: right;">54</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">L-N</td>
-<td style="text-align: right;">11</td>
 <td style="text-align: right;">234</td>
 </tr>
 </tbody>
@@ -1074,7 +1071,7 @@
 <section id="agregando-muestra-objetivo-error" class="slide level2">
 <h2>Agregando muestra objetivo (error)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">assess</span>(prod_salarial,                <span class="co"># indicamos estimacion con funcion create</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">assess</span>(prod_salarial,                </span>
 <span id="cb9-2"><a href=""></a>       <span class="at">scheme =</span> <span class="st">'chile_economics'</span>,   <span class="co"># indicamos criterio</span></span>
 <span id="cb9-3"><a href=""></a>       <span class="at">domain_info =</span> T,              <span class="co"># ¿pertenece a dominio planificado?</span></span>
 <span id="cb9-4"><a href=""></a>       <span class="at">table_n_obj =</span> ELE7_n_obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1375,7 +1372,7 @@ cod_actividad cod_actividad character numeric    FALSE</code></pre>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>evaluacion_estandar_publish <span class="ot">&lt;-</span> <span class="fu">assess</span>(prod_salarial,</span>
 <span id="cb25-2"><a href=""></a>                                      <span class="at">scheme =</span> <span class="st">'chile_economics'</span>,</span>
 <span id="cb25-3"><a href=""></a>                                      <span class="at">domain_info =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-4"><a href=""></a>                                      <span class="at">table_n_obj =</span> ELE7_n_obj2,     <span class="co"># tabla con tamaños objetivos corregidos</span></span>
+<span id="cb25-4"><a href=""></a>                                      <span class="at">table_n_obj =</span> ELE7_n_obj2,      </span>
 <span id="cb25-5"><a href=""></a>                                      <span class="at">ratio_between_0_1 =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb25-6"><a href=""></a>                                      <span class="at">publish =</span> <span class="cn">TRUE</span>) <span class="co"># parámetro de publicación</span></span>
 <span id="cb25-7"><a href=""></a></span>
@@ -1483,7 +1480,7 @@ cod_actividad cod_actividad character numeric    FALSE</code></pre>
 </ul>
 </div>
 <div class="fragment">
-<p><span class="center"><strong>Quedo atento ante sus comentarios 👀</strong></span></p>
+<p><span class="center"><strong>Quedo atento a sus comentarios 👀</strong></span></p>
 </div>
 </section></section>
 <section id="section-1" class="title-slide slide level1 center">
